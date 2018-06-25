@@ -23,6 +23,9 @@ In a simple web application, cookie authentication allows your existing user cre
 
 We do not recommend using Cookie authentication unless you only need to authenticate users from the browser client. When using the .NET Client, the `Cookies` property can be configured in the `.WithUrl` call in order to provide a cookie. However, this requires that you provide an API to exchange authentication data for a Cookie.
 
+> [!NOTE]
+> When using Cookie Authentication, you should configure CORS (Cross-Origin Resource Sharing) to ensure that only Origins you expect can make cross-origin requests. Otherwise, it is possible for a malicious web site to make authenticated requests on behalf of a user without their knowledge. See [Enable Cross-Origin Requests (CORS) in ASP.NET Core](xref:security/cors) for more information.
+
 ### Bearer Token Authentication
 
 When using the .NET Client, or when your SignalR Hubs are located on a different server from your web application, we recommend using bearer token authentication. In this authentication scheme, you configure the SignalR client with an access token to send to the server. The server validates this token and uses the data within it to identify the user. The details of bearer token authentication are beyond the scope of this document, but there are some things to note when using this form of authentication in SignalR. On the server, bearer token authentication is configured using the [JWT Bearer middleware](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer?view=aspnetcore-2.1).
